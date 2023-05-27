@@ -1,14 +1,17 @@
 import asyncio
 
-from config import dp, bot, commands
+from config import dp, bot, commands, storage
+from handlers.admin_handler import admin_, register_admin_handlers
+from handlers.user_handler import user_, register_user_handlers
+from middleware import ThrottlingMiddleware
 
 
 async def bot_working():
-    # register_admin_handlers()
-    register_user_handlers()
+    dp.message.middleware.register(ThrottlingMiddleware(storage=storage))
+
     register_admin_handlers()
-    dp.include_routers(user_)
-   # dp.include_routers(admin_, user_)
+    register_user_handlers()
+    dp.include_routers(admin_, user_)
     await bot.delete_webhook(drop_pending_updates=True)
     await bot.set_my_commands(commands)
     try:

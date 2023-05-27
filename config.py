@@ -1,4 +1,6 @@
 import logging
+
+from aiogram.fsm.storage.redis import RedisStorage
 from environs import Env
 from dataclasses import dataclass
 
@@ -26,7 +28,7 @@ def load_config(path: str = None):
 logging.basicConfig(level=logging.INFO)
 
 hidden_vars = load_config('..env')
-
+storage = RedisStorage.from_url('redis://@localhost:6379/0')
 bot = Bot(token=hidden_vars.bot_token)
 dp = Dispatcher()
 
