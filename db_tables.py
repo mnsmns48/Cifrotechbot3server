@@ -1,7 +1,7 @@
 from sqlalchemy import Table, VARCHAR, Text, ARRAY, Column, SmallInteger, MetaData, Float, Boolean, Integer
 
 metadata = MetaData()
-s_main = Table('s_main', metadata,
+s_main = Table('main', metadata,
                Column('title', VARCHAR(40), primary_key=True),
                Column('brand', VARCHAR(10)),
                Column('category', VARCHAR(15), nullable=True),
@@ -95,9 +95,9 @@ camera = Table('camera', metadata,
                Column('generic_camera_score', SmallInteger),
                Column('angle_of_widest_lens', VARCHAR(10), nullable=True),
                Column('slow_motion', VARCHAR(40), nullable=True),
-               Column('1080p_video_recording', VARCHAR(30), nullable=True),
-               Column('4k_video_recording', VARCHAR(30), nullable=True),
-               Column('8k_video_recording', VARCHAR(30), nullable=True),
+               Column('r1080p_video_recording', VARCHAR(30), nullable=True),
+               Column('r4k_video_recording', VARCHAR(30), nullable=True),
+               Column('r8k_video_recording', VARCHAR(30), nullable=True),
                Column('megapixels_front', Float, nullable=True),
                Column('image_resolution_front', VARCHAR(12), nullable=True),
                Column('aperture_front', VARCHAR(10), nullable=True),
@@ -175,3 +175,13 @@ physical_parameters = Table('physical_parameters', metadata,
                             Column('sensors', ARRAY(Text), nullable=True),
                             Column('charger_out_of_the_box', VARCHAR(20), nullable=True)
                             )
+
+aval = Table(
+    'aval', metadata,
+    Column('type_', VARCHAR),
+    Column('brand', VARCHAR),
+    Column('code', Integer),
+    Column('product', VARCHAR),
+    Column('quantity', Integer),
+    Column('price', Integer)
+)
